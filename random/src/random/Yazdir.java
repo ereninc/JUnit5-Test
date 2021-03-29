@@ -7,7 +7,6 @@
 * </p>
 */
 
-
 package random;
 
 public class Yazdir {

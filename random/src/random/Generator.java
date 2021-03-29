@@ -11,53 +11,53 @@ package random;
 
 public class Generator {
 	int rastgeleUretilenDeger;
-	public char KarakterAl() {
+	public char karakterAl() {
 		KarakterUretici karakterU = new KarakterUretici();
 		rastgeleUretilenDeger = karakterU.rastgeleKarakterUret();
 		return (char)rastgeleUretilenDeger;
 	}
 	
-    //girilen 2 karakter arasýndaki karakterlerden rastgele harf üreten metot.
+    //girilen 2 karakter arasýndaki karakterlerden rastgele harf üreten metot
     public char verilenIkiKarakter(int karakter1, int karakter2) {
         while(true){
-            rastgeleUretilenDeger = KarakterAl();
+            rastgeleUretilenDeger = karakterAl();
             if((rastgeleUretilenDeger >= karakter1) && (rastgeleUretilenDeger <= karakter2))
                 break;
         }
-        return (char) rastgeleUretilenDeger; 
+        return (char)rastgeleUretilenDeger; 
     }
     
-    //girilen sayý kadar rastgele karakter oluþturan metot.
+    //girilen sayý kadar rastgele karakter oluþturan metot
     public String nTaneRandom(int sayi) throws InterruptedException{
         String s = "";
         for (int i = 1; i <= sayi; i++) {
-            rastgeleUretilenDeger = KarakterAl();
+            rastgeleUretilenDeger = karakterAl();
             s += (char) rastgeleUretilenDeger;
             Thread.sleep(0L);
         }
         return s;
     }
     
-    //random cümle oluþturucu metot.
+    //random cümle oluþturan metot
     public String cumleOlustur(int boslukAdedi) throws InterruptedException{
     	KarakterUretici rast=new KarakterUretici();
         int karakterUzunluk;
         while(true) {
-            karakterUzunluk = (int) ((rast.RastgeleDegeriAl())%97);
+            karakterUzunluk = (int) ((rast.rastgeleDegeriAl())%97);
             if((karakterUzunluk>=15 && karakterUzunluk<=97))
                 break;
         }
         
         String cumle = "";
         for (int i = 0; i < karakterUzunluk; i++) {
-            cumle += KarakterAl(); //15 ile 97 arasýnda rastgele sayýda karakterli cümle generate edilip string degiskene atildi.
+            cumle += karakterAl();
             try {
                 Thread.sleep(0L);
             } catch (InterruptedException ex) {
             }
         }
         char cumleDonustur[] = null;
-        cumleDonustur = cumle.toCharArray(); //char dizisine attým
+        cumleDonustur = cumle.toCharArray();
         int boslukYerleri[] = new int[boslukAdedi]; //boþluklarýn geleceði indisleri dizide tuttum.
         
         for (int i = 0; i < boslukAdedi; i++) {
@@ -78,7 +78,7 @@ public class Generator {
     
     public char verilenKarakterlerden(int karakter1, int karakter2, int karakter3, int karakter4, int karakter5){
         while(true){
-            rastgeleUretilenDeger = KarakterAl();
+            rastgeleUretilenDeger = karakterAl();
             if((rastgeleUretilenDeger == karakter1) || (rastgeleUretilenDeger == karakter2) || (rastgeleUretilenDeger == karakter3) || (rastgeleUretilenDeger == karakter4) || (rastgeleUretilenDeger == karakter5))
                 break;
         }
@@ -86,13 +86,13 @@ public class Generator {
     }
     
     public void ekranaYazdirTekSefer() throws InterruptedException{
-        //rastgele tek karakter yazdýran metot.
+        //rastgele tek karakter yazdýran kod bloðu
         StringBuilder rastgeleKarakterYaz = new StringBuilder();
-        char randomChar1 = KarakterAl();
+        char randomChar1 = karakterAl();
         rastgeleKarakterYaz.append(randomChar1);
         System.out.println("Rastgele karakter: "+rastgeleKarakterYaz.toString());
         
-        //verilen karakterler arasýndan rastgele karakter üretme.
+        //verilen karakterler arasýndan rastgele karakter yazdýran blok
         StringBuilder rastgeleBelirtilenKrkArasiYaz = new StringBuilder();
         char paramx1 = 'g';
         char paramx2 = 'x';
@@ -103,7 +103,7 @@ public class Generator {
         rastgeleBelirtilenKrkArasiYaz.append(randomVerilen);
         System.out.println("Verilen karakter arasýndan rastgele("+paramx1+", "+paramx2+", "+paramx3+", "+paramx4+", "+paramx5+"): "+rastgeleBelirtilenKrkArasiYaz.toString());
         
-        //verilen 2 karakter arasýndan rastgele tek karakter yazdýran metot.
+        //verilen 2 karakter arasýndan rastgele tek karakter yazdýran blok
         StringBuilder rastgeleVerilenKrkArasiYaz = new StringBuilder();
         char param1 = 'a';
         char param2 = 'k';
@@ -111,14 +111,14 @@ public class Generator {
         rastgeleVerilenKrkArasiYaz.append(randomCharBoundary);
         System.out.println("Verilen iki karakter("+(param1+", "+param2)+"): "+rastgeleVerilenKrkArasiYaz.toString());
         
-        //n adet rastgele karakter yazdýran metot.
+        //n adet rastgele karakter yazdýran blok
         StringBuilder rastgeleNAdet = new StringBuilder();
         int charSay = 3;
         String nTaneKarakter = nTaneRandom(charSay);
         rastgeleNAdet.append(nTaneKarakter);
         System.out.println("Rastgele "+charSay+" adet: "+rastgeleNAdet.toString());
         
-        //cümle yazdýran metot. rastgele sayýda kelimeli (min2-max5)
+        //cümle yazdýran blok
         String rastgeleCumle = cumleOlustur(5);
         System.out.print("Rastgele Cumle : "+rastgeleCumle);
         System.out.print("\n");

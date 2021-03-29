@@ -11,8 +11,7 @@ package random;
 
 public class KarakterUretici {
 	long rastgeleUretilenDeger;
-	public long RastgeleDegeriAl() 
-	{
+	public long rastgeleDegeriAl() {
 		RastgeleDegerUretici randU = new RastgeleDegerUretici();
 		rastgeleUretilenDeger = randU.rastgeleUretici();
 		return rastgeleUretilenDeger;
@@ -22,12 +21,12 @@ public class KarakterUretici {
     public char rastgeleKarakterUret() {
         char karakter;
         while(true) {
-            rastgeleUretilenDeger = (int) ((RastgeleDegeriAl())%123); //sistem saati deðerinin 123 e bölümünden kalanýný yukarýda tanýmladýðým degiskene atýyorum.
+            rastgeleUretilenDeger = (int) ((rastgeleDegeriAl())%123);
             // ascii table'a göre üretim
             if((rastgeleUretilenDeger>=65 && rastgeleUretilenDeger<=90) || (rastgeleUretilenDeger>=97 && rastgeleUretilenDeger<=122))
                 break;
         }
-        karakter=(char) rastgeleUretilenDeger; //uretilen rastgeledeger char a donusturulup karakter degiskenine atýyorum.
+        karakter=(char) rastgeleUretilenDeger;
         return karakter;
     }
 }
