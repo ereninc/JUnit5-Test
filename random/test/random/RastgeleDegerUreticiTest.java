@@ -43,7 +43,7 @@ class RastgeleDegerUreticiTest {
 	}
 	
 	@AfterAll
-	public void tearDownAll() {
+	public static void tearDownAll() {
 		//Bütün testler bittiðinde burasý çalýþýyor.
 	}
 }
