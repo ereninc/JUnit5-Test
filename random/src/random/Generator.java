@@ -12,6 +12,7 @@ package random;
 public class Generator {
 	char verilenIkiKarakter1, verilenIkiKarakter2;
 	int adet;
+	int length;
 	
 	int rastgeleUretilenDeger;
 	public char karakterAl() {
@@ -65,6 +66,7 @@ public class Generator {
         adet = sayi;
         String nTaneKarakter = nTaneRandom(sayi);
         rastgeleNAdet.append(nTaneKarakter);
+        length = rastgeleNAdet.toString().length();
         System.out.println("Rastgele "+adet+" adet: "+rastgeleNAdet.toString());
     }
     
@@ -113,6 +115,19 @@ public class Generator {
                 break;
         }
         return (char) rastgeleUretilenDeger; 
+    }
+    
+    public void VerilenKarakterlerdenUretimParametreAyarla(char verilenParam1, char verilenParam2, char verilenParam3, char verilenParam4, char verilenParam5) {
+    	//verilen karakterler arasýndan rastgele karakter yazdýran blok
+        StringBuilder rastgeleBelirtilenKrkArasiYaz = new StringBuilder();
+        char paramx1 = verilenParam1;
+        char paramx2 = verilenParam2;
+        char paramx3 = verilenParam3;
+        char paramx4 = verilenParam4;
+        char paramx5 = verilenParam5;
+        char randomVerilen = verilenKarakterlerden(paramx1,paramx2,paramx3,paramx4,paramx5);
+        rastgeleBelirtilenKrkArasiYaz.append(randomVerilen);
+        System.out.println("Verilen karakter arasýndan rastgele("+verilenParam1+", "+verilenParam2+", "+verilenParam3+", "+verilenParam4+", "+verilenParam5+"): "+rastgeleBelirtilenKrkArasiYaz.toString());
     }
     
     public void ekranaYazdirTekSefer() throws InterruptedException{

@@ -162,6 +162,35 @@ class GeneratorTest {
 		@Order(3)
 		@DisplayName("Girilen Parametre Adetinde Mi Uretildi?")
 		void ParametreMaxIntDegerindenKucukMuTest() throws InterruptedException {
+			boolean esit = false;
+			int length = gen.length;
+			if(length == gen.adet) {
+				esit = true;
+			}
+			assertSame(true, esit);
+		}
+		
+		@AfterEach
+		public void tearDown() {
+			//Her test biriminden sonra burasý çalýþýyor.
+		}
+	}
+
+	@Nested
+	@DisplayName("Verilen Karakterler Arasindan Uretim")
+	class VerilenKarakterlerArasindanUretim{
+		Generator gen;
+		@BeforeEach
+		public void setup() {
+			//Her test birimi öncesinde burasý çalýþýyor.
+			gen = new Generator();
+		}
+
+		@Test
+		@Tag("VerilenlerArasindanUretimTest")
+		@Order(1)
+		@DisplayName("?")
+		void test() throws InterruptedException {
 			
 		}
 		
@@ -170,4 +199,5 @@ class GeneratorTest {
 			//Her test biriminden sonra burasý çalýþýyor.
 		}
 	}
+
 }
