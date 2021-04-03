@@ -12,8 +12,75 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-class GeneratorTest {
+class Tests {
 
+	@Nested
+	@DisplayName("Rastgele Deger Uretici Test")
+	class RastgeleDegerUreticiTest{
+		RastgeleDegerUretici rastgele;
+		
+		@BeforeEach
+		public void setup() {
+			//Her test birimi öncesinde burasý çalýþýyor.
+			rastgele = new RastgeleDegerUretici();
+		}
+		
+		//Elimize rastgele deðer geçmiþ mi kontrol ediliyor.
+		@Test
+		@DisplayName("Rastgele Deðer Üretildi Mi?")
+		void RastgeleDegerUretildiMiTest() {
+			long deger = rastgele.rastgeleUretici();
+			assertNotNull(deger);
+		}
+		
+		//Üretilen deðer sýfýrdan büyük mü? Yani kullanýlabilir mi test ediliyor.
+		@Test
+		@DisplayName("Rastgele Deðer Sýfýrdan Büyük mü?")
+		void RastgeleDegerSifirdanBuyukMuTest() {
+			long deger = rastgele.rastgeleUretici();
+			long uretilenDeger = deger>0? deger:0;
+			assertEquals(uretilenDeger, deger);
+		}
+		
+		@AfterEach
+		public void tearDown() {
+			//Her test biriminden sonra burasý çalýþýyor.
+		}
+	}
+
+	@Nested
+	@DisplayName("Karakter Uretici Test")
+	class KarakterUreticiTest{
+		KarakterUretici karakter;
+		
+		@BeforeEach
+		public void setup() {
+			//Her test birimi öncesinde burasý çalýþýyor.
+			karakter = new KarakterUretici();
+		}
+		
+		//Bu classta kullanýlacak deðer elimize geçmiþ mi kontrol.
+		@Test
+		@DisplayName("Rastgele Deðer Bu Class'a Aktarýldý mý?")
+		void KarakterUlastiMiTest() {
+			long deger = karakter.rastgeleDegeriAl();
+			assertNotNull(deger);
+		}
+		
+		//Class'a deðer ulaþtýysa bunu kullanarak karakter üretilmiþ mi kontrol.
+		@Test
+		@DisplayName("Rastgele Deðerden Char Üretildi Mi?")
+		void KarakterUretildiMiTest() {
+			char k = karakter.rastgeleKarakterUret();
+			assertNotNull(k);
+		}
+		
+		@AfterEach
+		public void tearDown() {
+			//Her test biriminden sonra burasý çalýþýyor.
+		}
+	}
+	
 	@Nested
 	@DisplayName("Tek Karakter Uretim Test")
 	class TekKarakter{
