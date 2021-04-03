@@ -11,6 +11,7 @@ package random;
 
 public class Generator {
 	char verilenIkiKarakter1, verilenIkiKarakter2;
+	int adet;
 	
 	int rastgeleUretilenDeger;
 	public char karakterAl() {
@@ -18,6 +19,14 @@ public class Generator {
 		rastgeleUretilenDeger = karakterU.rastgeleKarakterUret();
 		return (char)rastgeleUretilenDeger;
 	}
+	
+    public void tekKarakter() {
+        //rastgele tek karakter yazdýran kod bloðu
+        StringBuilder rastgeleKarakterYaz = new StringBuilder();
+        char randomChar1 = karakterAl();
+        rastgeleKarakterYaz.append(randomChar1);
+        System.out.println("Rastgele karakter: "+rastgeleKarakterYaz.toString());
+    }
 	
     //girilen 2 karakter arasýndaki karakterlerden rastgele harf üreten metot.
     public char verilenIkiKarakter(int karakter1, int karakter2) {
@@ -28,7 +37,7 @@ public class Generator {
         }
         return (char)rastgeleUretilenDeger; 
     }
-    
+   
     public void verilenKarakterParametreAyarla(char char1, char char2) {
     	//verilen 2 karakter arasýndan rastgele tek karakter yazdýran blok
         StringBuilder rastgeleVerilenKrkArasiYaz = new StringBuilder();
@@ -39,7 +48,6 @@ public class Generator {
         System.out.println("Verilen iki karakter("+(verilenIkiKarakter1+", "+verilenIkiKarakter2)+"): "+rastgeleVerilenKrkArasiYaz.toString());
     }
     
-    
     //Girilen sayý kadar rastgele karakter oluþturan metot.
     public String nTaneRandom(int sayi) throws InterruptedException{
         String s = "";
@@ -49,6 +57,15 @@ public class Generator {
             Thread.sleep(0L);
         }
         return s;
+    }
+    
+    public void nTaneRandomParametreAyarla(int sayi) throws InterruptedException {
+    	//n adet rastgele karakter yazdýran blok
+        StringBuilder rastgeleNAdet = new StringBuilder();
+        adet = sayi;
+        String nTaneKarakter = nTaneRandom(sayi);
+        rastgeleNAdet.append(nTaneKarakter);
+        System.out.println("Rastgele "+adet+" adet: "+rastgeleNAdet.toString());
     }
     
     //Random cümle oluþturan metot.
