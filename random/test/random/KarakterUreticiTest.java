@@ -1,6 +1,5 @@
 /**
- * @author ASUS 02.04.2021 - 01:42
- *
+ * 
  */
 package random;
 
@@ -13,10 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author ASUS 03.04.2021 - 16:17
+ *
+ */
+class KarakterUreticiTest {
 
-class RastgeleDegerUreticiTest {
-	
-	RastgeleDegerUretici rastgele;
+	KarakterUretici karakter;
 	@BeforeAll
 	public static void setupAll() {
 		//awake methodu gibi ilk çalýþýyor
@@ -25,24 +27,23 @@ class RastgeleDegerUreticiTest {
 	@BeforeEach
 	public void setup() {
 		//Her test birimi öncesinde burasý çalýþýyor.
-		rastgele = new RastgeleDegerUretici();
+		karakter = new KarakterUretici();
 	}
 	
-	//Elimize rastgele deðer geçmiþ mi kontrol ediliyor.
+	//Bu classta kullanýlacak deðer elimize geçmiþ mi kontrol.
 	@Test
-	@DisplayName("Rastgele Deðer Üretildi Mi?")
-	void RastgeleDegerUretildiMiTest() {
-		long deger = rastgele.rastgeleUretici();
+	@DisplayName("Rastgele Deðer Bu Class'a Aktarýldý mý?")
+	void KarakterUlastiMiTest() {
+		long deger = karakter.rastgeleDegeriAl();
 		assertNotNull(deger);
 	}
 	
-	//Üretilen deðer sýfýrdan büyük mü? Yani kullanýlabilir mi test ediliyor.
+	//Class'a deðer ulaþtýysa bunu kullanarak karakter üretilmiþ mi kontrol.
 	@Test
-	@DisplayName("Rastgele Deðer Sýfýrdan Büyük mü?")
-	void RastgeleDegerSifirdanBuyukMuTest() {
-		long deger = rastgele.rastgeleUretici();
-		long uretilenDeger = deger>0? deger:0;
-		assertEquals(uretilenDeger, deger);
+	@DisplayName("Rastgele Deðerden Char Üretildi Mi?")
+	void KarakterUretildiMiTest() {
+		char k = karakter.rastgeleKarakterUret();
+		assertNotNull(k);
 	}
 	
 	@AfterEach
@@ -54,4 +55,5 @@ class RastgeleDegerUreticiTest {
 	public static void tearDownAll() {
 		//Bütün testler bittiðinde burasý çalýþýyor.
 	}
+
 }
