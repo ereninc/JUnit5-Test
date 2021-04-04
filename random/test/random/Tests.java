@@ -1,14 +1,19 @@
 package random;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.annotation.Repeatable;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class Tests {
 
@@ -83,9 +88,16 @@ class Tests {
 		}
 		
 		@Test
-		@Tag("TekKarakterTest")
 		@DisplayName("Uretilen Veritipi Karakter Mi?")
 		void KarakterTipTest() {
+			Object karakterObject = karakter.rastgeleKarakterUret();
+			Object charObj = 'a';
+			assertEquals(karakterObject.getClass(), charObj.getClass());
+		}
+		
+		@RepeatedTest(5)
+		@DisplayName("Tekrar Testinde Sadece Karakter Mi Uretildi?")
+		void TekrarTesti() {
 			Object karakterObject = karakter.rastgeleKarakterUret();
 			Object charObj = 'a';
 			assertEquals(karakterObject.getClass(), charObj.getClass());
@@ -207,6 +219,20 @@ class Tests {
 			assertSame(true, kucukmu);
 		}
 		
+		@ParameterizedTest
+		@DisplayName("ParametreliTestBasariliMi?")
+		@Tag("VerilenAraliktaTekKarakter")
+		@Order(4)
+		@CsvSource({"'a','b'", "'f','g'"})
+		void ParametreliTest(char ch1, char ch2) {
+			boolean basarili = false;
+			char paramTestUretilen = gen.verilenIkiKarakter(ch1, ch2);
+			if(paramTestUretilen == ch1 || paramTestUretilen == ch2) {
+				basarili = true;
+			}
+			assertEquals(true, basarili);
+		}
+		
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
@@ -269,6 +295,20 @@ class Tests {
 			assertSame(true, esit);
 		}
 		
+		@ParameterizedTest
+		@DisplayName("ParametreliTestBasariliMi?")
+		@Tag("nAdetRandom")
+		@Order(5)
+		@CsvSource({"5", "1", "15", "20", "8", "-1", "0"})
+		void ParametreliTest(int sayi) {
+			boolean esit = false;
+			sayi = gen.length;
+			if(sayi == gen.adet) {
+				esit = true;
+			}
+			assertSame(true, esit);
+		}
+		
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
@@ -309,7 +349,7 @@ class Tests {
 		@Order(2)
 		@DisplayName("Uretilmis Mi?")
 		void UretilmisMiTest() {
-			char karakter = gen.verilenIkiKarakter('a', 'k');
+			char karakter = gen.verilenKarakterlerden('a', 'k', 'b', 'c', 'z');
 			assertNotNull(karakter);
 		}
 		
@@ -318,9 +358,22 @@ class Tests {
 		@Order(3)
 		@DisplayName("Uretilen Veri Karakter Mi?")
 		void KarakterUretilmisMiTest() {
-			Object obj = gen.verilenIkiKarakter('a', 'k');
+			Object obj = gen.verilenKarakterlerden('a', 'k', 'b', 'c', 'z');
 			Object charObj = 'a';
 			assertEquals(obj.getClass(), charObj.getClass());
+		}
+		
+		@ParameterizedTest
+		@DisplayName("ParametreliTestBasariliMi?")
+		@Order(4)
+		@CsvSource({"'a','b','c','d','e'", "'f','g','b','d','n'", "'x','n','o','y','i'", "'z','q','r','t','f'"})
+		void ParametreliTest(char ch1, char ch2, char ch3, char ch4, char ch5) {
+			boolean basarili = false;
+			char paramTestUretilen = gen.verilenKarakterlerden(ch1, ch2, ch3, ch4, ch5);
+			if(paramTestUretilen == ch1 || paramTestUretilen == ch2 ||paramTestUretilen == ch3 ||paramTestUretilen == ch4 ||paramTestUretilen == ch5) {
+				basarili = true;
+			}
+			assertEquals(true, basarili);
 		}
 		
 		@AfterEach
@@ -329,4 +382,35 @@ class Tests {
 		}
 	}
 
+	@Nested
+	@DisplayName("Rastgele Cumle Uretici Test")
+	class CumleOlusturucuTest{
+		Generator gen;
+		@BeforeEach
+		public void setup() {
+			//Her test birimi öncesinde burasý çalýþýyor.
+			gen = new Generator();
+		}
+		
+		@Test
+		@DisplayName("Rastgele Deðer Üretildi Mi?")
+		void RastgeleCumleUretildiMiTest() throws InterruptedException {
+			String cumle = gen.cumleOlustur(3);
+			assertNotNull(cumle);
+		}
+		
+		@Test
+		@DisplayName("Girilen Parametre integer Mi?")
+		void ParametreIntMiTest() throws InterruptedException {
+			gen.cumleOlustur(5);
+			Object intDeger = 15;
+			Object gelenDeger = gen.adet;
+			assertSame(intDeger.getClass(), gelenDeger.getClass());
+		}
+		
+		@AfterEach
+		public void tearDown() {
+			//Her test biriminden sonra burasý çalýþýyor.
+		}
+	}
 }

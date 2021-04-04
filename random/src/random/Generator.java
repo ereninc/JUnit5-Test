@@ -187,9 +187,9 @@ public class Generator {
     	VerilenKarakterlerdenUretimParametreAyarla('a', 'e', 'k', 'm', 'd');
     	verilenKarakterlerdenYazdir();
 
-    	cumleParametreAyarla(5);
+    	cumleParametreAyarla(3);
     	cumleYazdir();
-    	cumleParametreAyarla(5);
+    	cumleParametreAyarla(3);
     	cumleYazdir();
     }
     
