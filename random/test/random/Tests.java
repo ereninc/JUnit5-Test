@@ -1,10 +1,7 @@
 package random;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -35,7 +32,7 @@ class Tests {
 		
 		//Üretilen değer sıfırdan büyük mü? Yani kullanılabilir mi test ediliyor.
 		@Test
-		@DisplayName("Rastgele Değer Sıfırdan Büyük mü?")
+		@DisplayName("Rastgele Değer Sıfırdan Büyük mü? (Kullanılabilir mi?)")
 		void RastgeleDegerSifirdanBuyukMuTest() {
 			long deger = rastgele.rastgeleUretici();
 			long uretilenDeger = deger>0? deger:0;
