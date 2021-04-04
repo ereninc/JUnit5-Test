@@ -18,7 +18,7 @@ public class Generator {
 	int boslukSay;
 	int rastgeleUretilenDeger;
 	
-	//region Random tek karakter
+	//Random tek karakter
 	public char karakterAl() {
 		KarakterUretici karakterU = new KarakterUretici();
 		rastgeleUretilenDeger = karakterU.rastgeleKarakterUret();
@@ -32,10 +32,10 @@ public class Generator {
         rastgeleKarakterYaz.append(randomChar1);
         System.out.println("Rastgele karakter: "+rastgeleKarakterYaz.toString());
     }
-	//endregion
+	
+	
     
-    
-    //region Verilen 2 karakter araliginda random
+    //Verilen 2 karakter araliginda random
     public char verilenIkiKarakter(int karakter1, int karakter2) {
         while(true){
             rastgeleUretilenDeger = karakterAl();
@@ -51,16 +51,16 @@ public class Generator {
     }
     
     public void verilenKarakterYazdir() {
-    	//verilen 2 karakter arasýndan rastgele tek karakter yazdýran blok
         verilenKarakterParametreAyarla(verilenIkiKarakter1, verilenIkiKarakter2);
         StringBuilder rastgeleVerilenKrkArasiYaz = new StringBuilder();
         char randomCharBoundary = verilenIkiKarakter(verilenIkiKarakter1,verilenIkiKarakter2);
         rastgeleVerilenKrkArasiYaz.append(randomCharBoundary);
         System.out.println("Verilen iki karakter("+(verilenIkiKarakter1+", "+verilenIkiKarakter2)+"): "+rastgeleVerilenKrkArasiYaz.toString());
     } 
-    //endregion
     
-    //region Girilen sayi adetinde random karakter
+    
+    
+    //Girilen sayi adetinde random karakter
     public String nTaneRandom(int sayi) throws InterruptedException{
         String s = "";
         for (int i = 1; i <= sayi; i++) {
@@ -84,9 +84,10 @@ public class Generator {
         length = rastgeleNAdet.toString().length();
         System.out.println("Rastgele "+adet+" adet: "+rastgeleNAdet.toString());
     }    
-    //endregion
     
-    //region Verilen 5 karakter içinde random
+    
+    
+    //Verilen 5 karakter içinde random
     public char verilenKarakterlerden(int karakter1, int karakter2, int karakter3, int karakter4, int karakter5){
         while(true){
             rastgeleUretilenDeger = karakterAl();
@@ -112,9 +113,10 @@ public class Generator {
         rastgeleBelirtilenKrkArasiYaz.append(randomVerilen);
         System.out.println("Belirtilen Karakterler ("+param1+", "+param2+", "+param3+", "+param4+", "+param5+"): "+rastgeleBelirtilenKrkArasiYaz.toString());
     }
-    //endregion
     
-    //region Random cümle
+    
+    
+    //Random cümle
     public String cumleOlustur(int boslukAdedi) throws InterruptedException{
     	KarakterUretici rast=new KarakterUretici();
         int karakterUzunluk;
@@ -162,20 +164,31 @@ public class Generator {
         System.out.print("Rastgele Cumle : "+rastgeleCumle);
         System.out.print("\n");
     }
-    //endregion
     
+    
+    
+    //Print
     public void ekranaYazdirTekSefer() throws InterruptedException{
         tekKarakterYazdir();
+        tekKarakterYazdir();
     	
-    	verilenKarakterParametreAyarla('a', 'k');
+        verilenKarakterParametreAyarla('a', 'k');
+    	verilenKarakterYazdir();
+    	verilenKarakterParametreAyarla('e', 'm');
     	verilenKarakterYazdir();
     	
+    	nTaneRandomParametreAyarla(3);
+    	nTaneRandomYazdir();
     	nTaneRandomParametreAyarla(5);
     	nTaneRandomYazdir();
-    	
+
     	VerilenKarakterlerdenUretimParametreAyarla('a', 'e', 'k', 'm', 'd');
     	verilenKarakterlerdenYazdir();
-    	
+    	VerilenKarakterlerdenUretimParametreAyarla('a', 'e', 'k', 'm', 'd');
+    	verilenKarakterlerdenYazdir();
+
+    	cumleParametreAyarla(5);
+    	cumleYazdir();
     	cumleParametreAyarla(5);
     	cumleYazdir();
     }

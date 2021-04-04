@@ -1,5 +1,6 @@
 package random;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,15 @@ class Tests {
 		void RastgeleDegerUretildiMiTest() {
 			long deger = rastgele.rastgeleUretici();
 			assertNotNull(deger);
+		}
+		
+		@Test
+		@DisplayName("Uretilen Deðer long Veritipinde Mi?")
+		void RastgeleDegerVeritipiKontrol() {
+			int a = 15;
+			Object rnd = rastgele.rastgeleUretici();
+			Object longVal = (long)a;
+			assertEquals(rnd.getClass(), longVal.getClass());
 		}
 		
 		//Üretilen deðer sýfýrdan büyük mü? Yani kullanýlabilir mi test ediliyor.
@@ -72,6 +82,15 @@ class Tests {
 			assertNotNull(k);
 		}
 		
+		@Test
+		@Tag("TekKarakterTest")
+		@DisplayName("Uretilen Veritipi Karakter Mi?")
+		void KarakterTipTest() {
+			Object karakterObject = karakter.rastgeleKarakterUret();
+			Object charObj = 'a';
+			assertEquals(karakterObject.getClass(), charObj.getClass());
+		}
+		
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
@@ -98,10 +117,20 @@ class Tests {
 			char tek = gen.karakterAl();
 			assertNotNull(tek);
 		}
-
+		
 		@Test
 		@Tag("TekKarakterTest")
 		@Order(2)
+		@DisplayName("Uretilen Veritipi Karakter Mi?")
+		void KarakterTipTest() {
+			Object karakterObject = gen.karakterAl();
+			Object charObj = 'a';
+			assertEquals(karakterObject.getClass(), charObj.getClass());
+		}
+
+		@Test
+		@Tag("TekKarakterTest")
+		@Order(3)
 		@DisplayName("Tek Karakter Mi Üretildi?")
 		void TekKarakterTest() {
 			String a = "";
@@ -222,6 +251,14 @@ class Tests {
 		@Test
 		@Tag("nAdetRandom")
 		@Order(3)
+		@DisplayName("Uretildi Mi?")
+		void UretimTest() throws InterruptedException {
+			assertEquals(0, gen.adet);
+		}
+		
+		@Test
+		@Tag("nAdetRandom")
+		@Order(4)
 		@DisplayName("Girilen Parametre Adetinde Mi Uretildi?")
 		void ParametreMaxIntDegerindenKucukMuTest() throws InterruptedException {
 			boolean esit = false;
@@ -251,9 +288,39 @@ class Tests {
 		@Test
 		@Tag("VerilenlerArasindanUretimTest")
 		@Order(1)
-		@DisplayName("?")
-		void test() throws InterruptedException {
-			
+		@DisplayName("Girilen Parametreler Char Mi?")
+		void ParametreTipTest() throws InterruptedException {
+			Object o1 = gen.param1;
+			Object o2 = gen.param2;
+			Object o3 = gen.param3;
+			Object o4 = gen.param4;
+			Object o5 = gen.param5;
+			Object charObj = 'a';
+			boolean hepsiChar = false;
+			if(charObj.getClass() == o1.getClass() && charObj.getClass() == o2.getClass() && charObj.getClass() == o3.getClass() &&
+					charObj.getClass() == o4.getClass() && charObj.getClass() == o5.getClass()) {
+				hepsiChar = true;
+			}
+			assertSame(true, hepsiChar);
+		}
+		
+		@Test
+		@Tag("VerilenlerArasindanUretimTest")
+		@Order(2)
+		@DisplayName("Uretilmis Mi?")
+		void UretilmisMiTest() {
+			char karakter = gen.verilenIkiKarakter('a', 'k');
+			assertNotNull(karakter);
+		}
+		
+		@Test
+		@Tag("VerilenlerArasindanUretimTest")
+		@Order(3)
+		@DisplayName("Uretilen Veri Karakter Mi?")
+		void KarakterUretilmisMiTest() {
+			Object obj = gen.verilenIkiKarakter('a', 'k');
+			Object charObj = 'a';
+			assertEquals(obj.getClass(), charObj.getClass());
 		}
 		
 		@AfterEach
