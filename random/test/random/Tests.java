@@ -96,7 +96,6 @@ class Tests {
 		@DisplayName("Karakter Üretildi Mi")
 		void KarakterTest() {
 			char tek = gen.karakterAl();
-			gen.tekKarakter();
 			assertNotNull(tek);
 		}
 
@@ -107,7 +106,6 @@ class Tests {
 		void TekKarakterTest() {
 			String a = "";
 			char tek = gen.karakterAl();
-			gen.tekKarakter();
 			a += tek;
 			assertEquals(1, a.length());
 		}
