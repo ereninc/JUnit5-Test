@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import com.github.javafaker.Faker;
+
 class Tests {
 
 	@Nested
@@ -219,7 +221,7 @@ class Tests {
 		@ParameterizedTest
 		@DisplayName("ParametreliTestBasariliMi?")
 		@Tag("VerilenAraliktaTekKarakter")
-		@Order(4)
+		@Order(5)
 		@CsvSource({"'a','b'", "'f','g'"})
 		void ParametreliTest(char ch1, char ch2) {
 			boolean basarili = false;
@@ -229,6 +231,26 @@ class Tests {
 			}
 			assertEquals(true, basarili);
 		}
+		
+		/*
+		@Test
+		@Tag("VerilenAraliktaTekKarakter")
+		@Order(6)
+		@DisplayName("FakerParametreliTestBasariliMi?")
+		void FakerParametreTest() {
+			Faker faker = new Faker();
+			Object param1 = faker.lorem();
+			System.out.println(param1);
+			boolean kucukmu = false;
+			gen.verilenKarakterParametreAyarla('a', 'k');
+			int charToInt1 = (int)gen.verilenIkiKarakter1;
+			int charToInt2 = (int)gen.verilenIkiKarakter2;
+			if(charToInt1 < charToInt2) {
+				kucukmu = true;
+			}
+			assertSame(true, kucukmu);
+		}
+		*/
 		
 		@AfterEach
 		public void tearDown() {
@@ -260,10 +282,12 @@ class Tests {
 		@Test
 		@Tag("nAdetRandom")
 		@Order(2)
-		@DisplayName("Girilen Parametre Pozitif Mi?")
+		@DisplayName("Faker - Girilen Parametre Pozitif Mi?")
 		void ParametrePozitifMiTest() throws InterruptedException {
 			boolean pozitifMi = false;
-			gen.nTaneRandomParametreAyarla(3);
+			Faker faker = new Faker();
+			int value = faker.number().numberBetween(0, 999);
+			gen.nTaneRandomParametreAyarla(value);
 			int deger = gen.adet;
 			if(deger > 0) {
 				pozitifMi = true;
@@ -304,6 +328,19 @@ class Tests {
 				esit = true;
 			}
 			assertSame(true, esit);
+		}
+		
+		@Test
+		@Tag("nAdetRandom")
+		@Order(6)
+		@DisplayName("Faker - Girilen Parametre integer Mi?")
+		void FakerParametreIntMiTest() throws InterruptedException {
+			Faker faker = new Faker();
+			int param = faker.number().numberBetween(1, 15);
+			gen.nTaneRandomParametreAyarla(param);
+			Object intDeger = param;
+			Object gelenDeger = gen.adet;
+			assertSame(intDeger.getClass(), gelenDeger.getClass());
 		}
 		
 		@AfterEach
@@ -373,6 +410,21 @@ class Tests {
 			assertEquals(true, basarili);
 		}
 		
+		@Test
+		@Tag("VerilenlerArasindanUretimTest")
+		@Order(5)
+		@DisplayName("Uretilmis Mi?")
+		void FakerUretilmisMiTest() {
+			Faker faker = new Faker();
+			char param1 = faker.lorem().character(false);
+			char param2 = faker.lorem().character(false);
+			char param3 = faker.lorem().character(false);
+			char param4 = faker.lorem().character(false);
+			char param5 = faker.lorem().character(false);
+			char karakter = gen.verilenKarakterlerden(param1, param2, param3, param4, param5);
+			assertNotNull(karakter);
+		}
+		
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
@@ -389,12 +441,6 @@ class Tests {
 			gen = new Generator();
 		}
 		
-		@Test
-		@DisplayName("Rastgele Deðer Üretildi Mi?")
-		void RastgeleCumleUretildiMiTest() throws InterruptedException {
-			String cumle = gen.cumleOlustur(3);
-			assertNotNull(cumle);
-		}
 		
 		@Test
 		@DisplayName("Girilen Parametre integer Mi?")
