@@ -78,6 +78,22 @@ class Tests {
 			assertNotNull(deger);
 		}
 		
+		@Test
+		@DisplayName("Faker-Rastgele Deðer ile Uretim Yapiliyor Mu?")
+		void FakerKarakterUlastiMiTest() {
+			Faker faker = new Faker();
+			long deger = faker.number().randomNumber();
+			int val;
+			char karakter;
+	        while(true) {
+	        	val = (int) (deger%123);
+	            if((val>=65 && val<=90) || (val>=97 && val<=122))
+	                break;
+	        }
+	        karakter=(char) val;
+			assertNotNull(karakter);
+		}
+		
 		//Class'a deðer ulaþtýysa bunu kullanarak karakter üretilmiþ mi kontrol.
 		@Test
 		@DisplayName("Rastgele Deðerden Char Üretildi Mi?")
