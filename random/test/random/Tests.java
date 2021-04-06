@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import com.github.javafaker.Faker;
 
@@ -66,15 +69,20 @@ class Tests {
 	@Nested
 	@DisplayName("Karakter Uretici Test")
 	class KarakterUreticiTest{
+		@Mock
 		KarakterUretici karakter;
 		
-		/*@BeforeAll
+		@InjectMocks
+		KarakterUretici kar;
+		
+		@Before
 		public void setupAll() {
-			KarakterUretici kr = mock(KarakterUretici.class);
-			when(kr.rastgeleKarakterUret()).thenReturn('a');
-			when(kr.rastgeleUretilenDeger).thenReturn((long) 535513835);
-			when(kr.rastgeleDegeriAl()).thenReturn((long) 922337152);
-		}*/
+			kar = mock(KarakterUretici.class);
+			when(kar.rastgeleKarakterUret()).thenReturn('a');
+			when(kar.rastgeleUretilenDeger).thenReturn((long) 535513835);
+			when(kar.rastgeleDegeriAl()).thenReturn((long) 922337152);
+			karakter = kar;
+		}
 		
 		@BeforeEach
 		public void setup() {
@@ -261,26 +269,6 @@ class Tests {
 			}
 			assertEquals(true, basarili);
 		}
-		
-		/*
-		@Test
-		@Tag("VerilenAraliktaTekKarakter")
-		@Order(6)
-		@DisplayName("FakerParametreliTestBasariliMi?")
-		void FakerParametreTest() {
-			Faker faker = new Faker();
-			Object param1 = faker.lorem();
-			System.out.println(param1);
-			boolean kucukmu = false;
-			gen.verilenKarakterParametreAyarla('a', 'k');
-			int charToInt1 = (int)gen.verilenIkiKarakter1;
-			int charToInt2 = (int)gen.verilenIkiKarakter2;
-			if(charToInt1 < charToInt2) {
-				kucukmu = true;
-			}
-			assertSame(true, kucukmu);
-		}
-		*/
 		
 		@AfterEach
 		public void tearDown() {
