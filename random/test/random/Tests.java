@@ -1,7 +1,11 @@
 package random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -64,6 +68,14 @@ class Tests {
 	class KarakterUreticiTest{
 		KarakterUretici karakter;
 		
+		/*@BeforeAll
+		public void setupAll() {
+			KarakterUretici kr = mock(KarakterUretici.class);
+			when(kr.rastgeleKarakterUret()).thenReturn('a');
+			when(kr.rastgeleUretilenDeger).thenReturn((long) 535513835);
+			when(kr.rastgeleDegeriAl()).thenReturn((long) 922337152);
+		}*/
+		
 		@BeforeEach
 		public void setup() {
 			//Her test birimi öncesinde burasý çalýþýyor.
@@ -117,6 +129,8 @@ class Tests {
 			Object charObj = 'a';
 			assertEquals(karakterObject.getClass(), charObj.getClass());
 		}
+		
+		@Test
 		
 		@AfterEach
 		public void tearDown() {
