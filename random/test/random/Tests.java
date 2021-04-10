@@ -98,6 +98,7 @@ class Tests {
 			assertNotNull(deger);
 		}
 		
+		
 		@Test
 		@DisplayName("Faker-Rastgele Deðer ile Uretim Yapiliyor Mu?")
 		void FakerKarakterUlastiMiTest() {
@@ -109,10 +110,13 @@ class Tests {
 	        	val = (int) (deger%123);
 	            if((val>=65 && val<=90) || (val>=97 && val<=122))
 	                break;
+	            else
+	            	break;
 	        }
 	        karakter=(char) val;
 			assertNotNull(karakter);
 		}
+		
 		
 		//Class'a deðer ulaþtýysa bunu kullanarak karakter üretilmiþ mi kontrol.
 		@Test
@@ -130,16 +134,14 @@ class Tests {
 			assertEquals(karakterObject.getClass(), charObj.getClass());
 		}
 		
-		@RepeatedTest(5)
+		@RepeatedTest(6)
 		@DisplayName("Tekrar Testinde Sadece Karakter Mi Uretildi?")
 		void TekrarTesti() {
 			Object karakterObject = karakter.rastgeleKarakterUret();
 			Object charObj = 'a';
 			assertEquals(karakterObject.getClass(), charObj.getClass());
 		}
-		
-		@Test
-		
+
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
