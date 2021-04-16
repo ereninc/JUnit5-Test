@@ -1,153 +1,29 @@
+/**
+*
+* @author Erencan ÝNANCI - erencan.inanci@ogr.sakarya.edu.tr
+* @since 16.04.2021 - 21:06
+* <p>
+* Generator sýnýfýndaki metotlarýn birim test metotlarýnýn olduðu sýnýf.
+* </p>
+*/
+
 package random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
 import com.github.javafaker.Faker;
 
-class Tests {
-
-	@Nested
-	@DisplayName("Rastgele Deger Uretici Test")
-	class RastgeleDegerUreticiTest{
-		RastgeleDegerUretici rastgele;
-		
-		@BeforeEach
-		public void setup() {
-			//Her test birimi öncesinde burasý çalýþýyor.
-			rastgele = new RastgeleDegerUretici();
-		}
-		
-		//Elimize rastgele deðer geçmiþ mi kontrol ediliyor.
-		@Test
-		@DisplayName("Rastgele Deðer Üretildi Mi?")
-		void RastgeleDegerUretildiMiTest() {
-			long deger = rastgele.rastgeleUretici();
-			assertNotNull(deger);
-		}
-		
-		@Test
-		@DisplayName("Uretilen Deðer long Veritipinde Mi?")
-		void RastgeleDegerVeritipiKontrol() {
-			int a = 15;
-			Object rnd = rastgele.rastgeleUretici();
-			Object longVal = (long)a;
-			assertEquals(rnd.getClass(), longVal.getClass());
-		}
-		
-		//Üretilen deðer sýfýrdan büyük mü? Yani kullanýlabilir mi test ediliyor.
-		@Test
-		@DisplayName("Rastgele Deðer Sýfýrdan Büyük mü? (Kullanýlabilir mi?)")
-		void RastgeleDegerSifirdanBuyukMuTest() {
-			long deger = rastgele.rastgeleUretici();
-			long uretilenDeger = deger>0? deger:0;
-			assertEquals(uretilenDeger, deger);
-		}
-		
-		@AfterEach
-		public void tearDown() {
-			//Her test biriminden sonra burasý çalýþýyor.
-		}
-	}
-
-	@Nested
-	@DisplayName("Karakter Uretici Test")
-	class KarakterUreticiTest{
-		@Mock
-		KarakterUretici karakter;
-		
-		@InjectMocks
-		KarakterUretici kar;
-		
-		@Before
-		public void setupAll() {
-			kar = mock(KarakterUretici.class);
-			when(kar.rastgeleKarakterUret()).thenReturn('a');
-			when(kar.rastgeleUretilenDeger).thenReturn((long) 535513835);
-			when(kar.rastgeleDegeriAl()).thenReturn((long) 922337152);
-			karakter = kar;
-		}
-		
-		@BeforeEach
-		public void setup() {
-			//Her test birimi öncesinde burasý çalýþýyor.
-			karakter = new KarakterUretici();
-		}
-		
-		//Bu classta kullanýlacak deðer elimize geçmiþ mi kontrol.
-		@Test
-		@DisplayName("Rastgele Deðer Bu Class'a Aktarýldý mý?")
-		void KarakterUlastiMiTest() {
-			long deger = karakter.rastgeleDegeriAl();
-			assertNotNull(deger);
-		}
-		
-		
-		@Test
-		@DisplayName("Faker-Rastgele Deðer ile Uretim Yapiliyor Mu?")
-		void FakerKarakterUlastiMiTest() {
-			Faker faker = new Faker();
-			long deger = faker.number().randomNumber();
-			int val;
-			char karakter;
-	        while(true) {
-	        	val = (int) (deger%123);
-	            if((val>=65 && val<=90) || (val>=97 && val<=122))
-	                break;
-	            else
-	            	break;
-	        }
-	        karakter=(char) val;
-			assertNotNull(karakter);
-		}
-		
-		
-		//Class'a deðer ulaþtýysa bunu kullanarak karakter üretilmiþ mi kontrol.
-		@Test
-		@DisplayName("Rastgele Deðerden Char Üretildi Mi?")
-		void KarakterUretildiMiTest() {
-			char k = karakter.rastgeleKarakterUret();
-			assertNotNull(k);
-		}
-		
-		@Test
-		@DisplayName("Uretilen Veritipi Karakter Mi?")
-		void KarakterTipTest() {
-			Object karakterObject = karakter.rastgeleKarakterUret();
-			Object charObj = 'a';
-			assertEquals(karakterObject.getClass(), charObj.getClass());
-		}
-		
-		@RepeatedTest(6)
-		@DisplayName("Tekrar Testinde Sadece Karakter Mi Uretildi?")
-		void TekrarTesti() {
-			Object karakterObject = karakter.rastgeleKarakterUret();
-			Object charObj = 'a';
-			assertEquals(karakterObject.getClass(), charObj.getClass());
-		}
-
-		@AfterEach
-		public void tearDown() {
-			//Her test biriminden sonra burasý çalýþýyor.
-		}
-	}
-	
+class GeneratorTest {
 	@Nested
 	@DisplayName("Tek Karakter Uretim Test")
 	class TekKarakter{
@@ -178,10 +54,22 @@ class Tests {
 			Object charObj = 'a';
 			assertEquals(karakterObject.getClass(), charObj.getClass());
 		}
-
+		
 		@Test
 		@Tag("TekKarakterTest")
 		@Order(3)
+		@DisplayName("Uretilen Veritipi Karakter Mi Mock?")
+		void KarakterTipMockTest() {
+			Generator mock = mock(Generator.class);
+			when(mock.karakterAl()).thenReturn('Z');
+			Object karakterObject = mock.karakterAl();
+			Object charObj = 'a';
+			assertEquals(karakterObject.getClass(), charObj.getClass());
+		}
+
+		@Test
+		@Tag("TekKarakterTest")
+		@Order(4)
 		@DisplayName("Tek Karakter Mi Üretildi?")
 		void TekKarakterTest() {
 			String a = "";
@@ -212,8 +100,19 @@ class Tests {
 		@Order(1)
 		@DisplayName("Karakter Uretiliyor Mu?")
 		void UretimVarMiTest() {
-			char uretilen = gen.verilenIkiKarakter('a', 'k');
+			char uretilen = gen.verilenIkiKarakter('a', 'c');
 			assertNotNull(uretilen);
+		}
+		
+		@Test
+		@Tag("VerilenAraliktaTekKarakter")
+		@Order(1)
+		@DisplayName("Karakter Uretiliyor Mu Mock?")
+		void UretimVarMiMockTest() {
+			Generator mock = mock(Generator.class);
+			when(mock.verilenIkiKarakter('a','c')).thenReturn('b');
+			char uretilen = mock.verilenIkiKarakter('a', 'c');
+			assertEquals(uretilen, 'b');
 		}
 		
 		@Test
@@ -445,6 +344,17 @@ class Tests {
 			assertNotNull(karakter);
 		}
 		
+		@Test
+		@Tag("VerilenlerArasindanUretimTest")
+		@Order(5)
+		@DisplayName("Uretilmis Mi?")
+		void FakerUretilmisMiMockTest() {
+			Generator mock = mock(Generator.class);
+			when(mock.verilenKarakterlerden('a', 'z', 'c', 'k', 'q')).thenReturn('q');
+			char karakter = mock.verilenKarakterlerden('a', 'z', 'c', 'k', 'q');
+			assertEquals(karakter, 'q');
+		}
+		
 		@AfterEach
 		public void tearDown() {
 			//Her test biriminden sonra burasý çalýþýyor.
@@ -463,7 +373,7 @@ class Tests {
 		
 		
 		@Test
-		@DisplayName("Girilen Parametre integer Mi?")
+		@DisplayName("Kelime Adedi Parametresi Integer Mi?")
 		void ParametreIntMiTest() throws InterruptedException {
 			gen.cumleOlustur(5);
 			Object intDeger = 15;
